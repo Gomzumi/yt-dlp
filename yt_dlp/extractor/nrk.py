@@ -170,6 +170,8 @@ class NRKIE(NRKBaseIE):
                     return self._call_api(f'playback/{item}/{video_id}', video_id, item, query=query)
                 raise
 
+        if not self._cookies_passed:
+            self._set_cookie('https://tv.nrk.no', 'nrk-login-context-info', '%7B%22clientId%22%3A%22tv.nrk.no.web2%22%2C%22authority%22%3A%22https%3A%2F%2Finnlogging.nrk.no%22%7D')
         # known values for preferredCdn: akamai, globalconnect and telenor
         manifest = call_playback_api('manifest', {'preferredCdn': 'akamai'})
 
